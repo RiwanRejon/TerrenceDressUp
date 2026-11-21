@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>✨ Terry's Super Fabulous Magical Dress-Up Swag ✨</title>
+  <link rel="stylesheet" href="./sources/styles.css">
+</head>
+<body>
+  <!-- Banner -->
+   <div id="banner-panel">
+      <img id="banner" width="800" height="100" src="./sources/terry_banner.gif" alt="Terrence Banner girly pop"/>
+      <button id="bgmBtn" onclick="bgmToggle()">🔊</button>
+   </div>
+
+
+  <div id="game-area">
+    <!-- Left panel: wardrobe -->
+    <div id="clothes-panel">
+      <h2>Wardrobe</h2>
+      <button id="reset-btn">Undress</button>
+      <!-- Items injected by JS -->
+    </div>
+
+    <!-- Centre: character stage -->
+    <div id="stage">
+      <img id="terrence" src="./sources/terrence.png" alt="Terrence" draggable="false" />
+    </div>
+
+    <!-- Right: ads -->
+     <div id="ads-panel">
+      <h2>Ads</h2>
+      <img id="ad_gif" src="./sources/ads/felis gif.gif" alt="" draggable="false" />
+    </div>
+  </div>
+
+
+
+  <!-- Ghost image that follows the cursor while dragging -->
+  <img id="drag-ghost" src="" alt="" draggable="false" />
+
+  <!-- Splash screen : click to continue -->
+  <div id="splash-screen" onclick="hideSplash()">
+      <div id="splash-panel">
+        <img id="splash-animation" src="./sources/splash_screen.gif" alt="Splash screen girly pop"/>
+        <p class="splash-text">CLICK TO CONTINUE</p>
+      </div>
+  </div>
+
+</body>
+</html>
+
+<script src="./sources/scripts.js"></script>
