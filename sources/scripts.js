@@ -14,6 +14,10 @@
       { src: 'clothes/pointed boots.png'},
       { src: 'clothes/tshirt 1.png'},
       { src: 'clothes/tshirt 2.png'},
+      { src: 'clothes/disco pants.png'},
+      { src: 'clothes/hotdog costume.png'},
+      { src: 'clothes/lesbian shorts.png'},
+      { src: 'clothes/sunset shirt.png'},
     ];
 
        const SOUNDS = [
@@ -223,6 +227,7 @@
     // ── Disappear Splash screen ──────────────────────────────────────────────────────────
     function hideSplash() {
       document.getElementById('splash-screen').style.display = "none";
+      document.body.style.overflowY = "auto";
     }
 
     // ── Reset ─────────────────────────────────────────────────────────────────

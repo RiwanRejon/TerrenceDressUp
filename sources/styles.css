@@ -12,6 +12,7 @@
       flex-direction: column;
       align-items: center;
       overflow-x: hidden;
+      overflow-y: hidden;
     }
 
     h1 {
@@ -69,6 +70,11 @@
       display: flex;
       justify-content: center;
       cursor: pointer;
+    }
+
+    #splash-animation {
+      width: 100%;
+      height: auto;
     }
 
     .splash-text {
@@ -204,7 +210,11 @@
       background: rgba(255,255,255,0.55);
       border: 3px solid #f4a0d8;
       border-radius: 20px;
-      padding: 5px;
+      padding: 16px 12px;
+    }
+
+    #ads-panel h2{ 
+      margin-bottom: 16px;
     }
 
     #reset-btn {
