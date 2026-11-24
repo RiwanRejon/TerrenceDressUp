@@ -18,6 +18,14 @@
       { src: 'clothes/hotdog costume.png'},
       { src: 'clothes/lesbian shorts.png'},
       { src: 'clothes/sunset shirt.png'},
+      { src: 'clothes/chunky boots.png'},
+      { src: 'clothes/glass shirt.png'},
+      { src: 'clothes/jeans 1.png'},
+      { src: 'clothes/jeans 2.png'},
+      { src: 'clothes/little tights.png'},
+      { src: 'clothes/shirt and vest 2.png'},
+      { src: 'clothes/simple tank top.png'},
+      { src: 'clothes/texnoupoli tshirt.png'},
     ];
 
        const SOUNDS = [
