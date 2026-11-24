@@ -229,7 +229,7 @@
       setInterval(() => {
         index = (index + 1) % ADS.length;
         adEl.src = ADS[index];
-      }, 6000);
+      }, 2000);
     })();
 
     // ── Disappear Splash screen ──────────────────────────────────────────────────────────

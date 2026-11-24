@@ -35,10 +35,9 @@
       display: flex;
       flex-direction: row;
       align-items: flex-start;
-      justify-content: space-between;
+      justify-content: center;
       gap: 30px;
       width: 100%;
-      max-width: 1263px;
       padding: 0 16px 30px;
     }
 
@@ -207,9 +206,10 @@
 
     /* ── Ads panel ──────────────────────────────── */
     #ads-panel {
-      background: rgba(255,255,255,0.55);
+      width: 388px;
+      /* background: rgba(255,255,255,0.55);
       border: 3px solid #f4a0d8;
-      border-radius: 20px;
+      border-radius: 20px; */
       padding: 16px 12px;
     }
 
