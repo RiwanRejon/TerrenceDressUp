@@ -9,23 +9,29 @@
     ]
     
     const CLOTHES = [
-      { src: 'clothes/Blue trousers.png'},
-      { src: 'clothes/shirt and vest.png'},
-      { src: 'clothes/pointed boots.png'},
-      { src: 'clothes/tshirt 1.png'},
-      { src: 'clothes/tshirt 2.png'},
-      { src: 'clothes/disco pants.png'},
-      { src: 'clothes/hotdog costume.png'},
-      { src: 'clothes/lesbian shorts.png'},
-      { src: 'clothes/sunset shirt.png'},
-      { src: 'clothes/chunky boots.png'},
-      { src: 'clothes/glass shirt.png'},
-      { src: 'clothes/jeans 1.png'},
-      { src: 'clothes/jeans 2.png'},
-      { src: 'clothes/little tights.png'},
-      { src: 'clothes/shirt and vest 2.png'},
-      { src: 'clothes/simple tank top.png'},
-      { src: 'clothes/texnoupoli tshirt.png'},
+      { src: 'clothes/Blue trousers.png', type: 'bottom'},
+      { src: 'clothes/shirt and vest.png', type: 'top'},
+      { src: 'clothes/pointed boots.png', type: 'shoes'},
+      { src: 'clothes/tshirt 1.png', type: 'top'},
+      { src: 'clothes/tshirt 2.png', type: 'top'},
+      { src: 'clothes/disco pants.png', type: 'bottom'},
+      { src: 'clothes/hotdog costume.png', type: 'misc'},
+      { src: 'clothes/lesbian shorts.png', type: 'bottom'},
+      { src: 'clothes/sunset shirt.png', type: 'top'},
+      { src: 'clothes/chunky boots.png', type: 'shoes'},
+      { src: 'clothes/glass shirt.png', type: 'top'},
+      { src: 'clothes/jeans 1.png', type: 'bottom'},
+      { src: 'clothes/jeans 2.png', type: 'bottom'},
+      { src: 'clothes/little tights.png', type: 'bottom'},
+      { src: 'clothes/shirt and vest 2.png', type: 'top'},
+      { src: 'clothes/simple tank top.png', type: 'top'},
+      { src: 'clothes/texnoupoli tshirt.png', type: 'top'},
+      { src: 'clothes/jacket shirt combo.png', type: 'top'},
+      { src: 'clothes/mini babybell underwear.png', type: 'bottom'},
+      { src: 'clothes/sandals.png', type: 'shoes'},
+      { src: 'clothes/short shorts 1.png', type: 'bottom'},
+      { src: 'clothes/sneakers 1.png', type: 'shoes'},
+      { src: 'clothes/sneakers 2.png', type: 'shoes'},
     ];
 
        const SOUNDS = [
@@ -52,7 +58,7 @@
     // ─── Elements ────────────────────────────────────────────────────────────
     const stage       = document.getElementById('stage');
     const terrence    = document.getElementById('terrence');
-    const panel       = document.getElementById('clothes-panel');
+    const panel       = document.getElementById('wardrobe-grid');
     const ghost       = document.getElementById('drag-ghost');
     const resetBtn    = document.getElementById('reset-btn');
 
@@ -66,15 +72,15 @@
     CLOTHES.forEach(cloth => {
       const item = document.createElement('div');
       item.className = 'clothes-item';
-      item.dataset.src = cloth.src;
+      item.dataset.src  = cloth.src;
+      item.dataset.type = cloth.type;
 
       const img = document.createElement('img');
       img.src = cloth.src;
-      img.alt = cloth.name;
+      img.alt = cloth.src;
 
       const label = document.createElement('span');
       label.className = 'label';
-      // label.textContent = cloth.name;
 
       item.appendChild(img);
       item.appendChild(label);
@@ -85,6 +91,20 @@
 
       // ── Touch drag (mobile) ───────────────────────────────────────────────
       item.addEventListener('touchstart', onTouchStart, { passive: false });
+    });
+
+    // ─── Tab filtering ───────────────────────────────────────────────────────
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const tab = btn.dataset.tab;
+        document.querySelectorAll('.clothes-item').forEach(item => {
+          const visible = tab === 'all' || item.dataset.type === tab;
+          item.style.display = visible ? 'flex' : 'none';
+        });
+      });
     });
 
     // ─── Drag state ──────────────────────────────────────────────────────────
