@@ -245,21 +245,39 @@
     }
 
     /* ── Ads panel ──────────────────────────────── */
-    #ads-panel {
+    #right-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+
+    #ads-panel, #button-panel {
       width: 388px;
-      /* background: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.55);
       border: 3px solid #f4a0d8;
-      border-radius: 20px; */
+      border-radius: 20px;
       padding: 16px 12px;
+    }
+
+    #button-panel {
+      display: flex;
+      flex-direction: row;
+      gap: 14px;
+    }
+
+    #ad_gif {
+      width: 100%;
     }
 
     #ads-panel h2{ 
       margin-bottom: 16px;
     }
 
-    #reset-btn {
-      width: 110px;
-      height: 110px;
+    #reset-btn, #bgmBtn {
+      /* width: 110px;
+      height: 110px; */
+      padding: 12px;
       display: block;
       margin: 0 auto;
       padding: 10px;

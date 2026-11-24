@@ -32,6 +32,10 @@
       { src: 'clothes/short shorts 1.png', type: 'bottom'},
       { src: 'clothes/sneakers 1.png', type: 'shoes'},
       { src: 'clothes/sneakers 2.png', type: 'shoes'},
+      { src: 'clothes/boots with golden accents.png', type: 'shoes'},
+      { src: 'clothes/pink slippers.png', type: 'shoes'},
+      { src: 'clothes/tassel bag.png', type: 'misc'},
+      { src: 'clothes/miami bejeweled tshirt.png', type: 'top'},
     ];
 
        const SOUNDS = [
@@ -234,10 +238,13 @@
     function bgmToggle() {
       if (bgMusic.paused) {
         bgMusic.play();
-        bgmBtn.textContent = '\uD83D\uDD0A';
+        bgmBtn.textContent = 'Mute Music';
+        // bgmBtn.textContent = '\uD83D\uDD0A';
+        
       } else {
         bgMusic.pause();
-        bgmBtn.textContent = '\uD83D\uDD07';
+        bgmBtn.textContent = 'Play Music';
+        // bgmBtn.textContent = '\uD83D\uDD07';
       }
     }
     // ── Ad GIF rotator ──────────────────────────────────────────────────────────
