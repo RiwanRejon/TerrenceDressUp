@@ -36,6 +36,14 @@
       { src: 'clothes/pink slippers.png', type: 'shoes'},
       { src: 'clothes/tassel bag.png', type: 'misc'},
       { src: 'clothes/miami bejeweled tshirt.png', type: 'top'},
+      { src: 'clothes/bag with dog.png', type: 'misc'},
+      { src: 'clothes/clown costume.png', type: 'misc'},
+      { src: 'clothes/gun.png', type: 'misc'},
+      { src: 'clothes/long coat.png', type: 'misc'},
+      { src: 'clothes/pink wig.png', type: 'misc'},
+      { src: 'clothes/star shirt.png', type: 'top'},
+      { src: 'clothes/tights long.png', type: 'bottom'},
+
     ];
 
        const SOUNDS = [
@@ -97,19 +105,33 @@
       item.addEventListener('touchstart', onTouchStart, { passive: false });
     });
 
-    // ─── Tab filtering ───────────────────────────────────────────────────────
+    // ─── Set Default tab ─────────────────────────────────────────────
+    filterByType("top");
+
+    // ─── Set Tab filtering ───────────────────────────────────────────────────────
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
         const tab = btn.dataset.tab;
-        document.querySelectorAll('.clothes-item').forEach(item => {
-          const visible = tab === 'all' || item.dataset.type === tab;
-          item.style.display = visible ? 'flex' : 'none';
-        });
+        filterByType(tab);
+        // document.querySelectorAll('.clothes-item').forEach(item => {
+        //   const visible = tab === 'all' || item.dataset.type === tab;
+        //   item.style.display = visible ? 'flex' : 'none';
+        // });
       });
     });
+
+
+    // ────── Filter by type function ────────────────────────────────────────────────
+
+    function filterByType(type) {
+      document.querySelectorAll('.clothes-item').forEach(item => {
+          const visible = item.dataset.type === type;
+          item.style.display = visible ? 'flex' : 'none';
+      });
+    }
 
     // ─── Drag state ──────────────────────────────────────────────────────────
     let dragSrc    = null;   // src of the item being dragged
@@ -192,13 +214,13 @@
                   cy >= stageRect.top  && cy <= stageRect.bottom;
 
       if (hit && dragSrc) {
-        wearCloth(dragSrc);
+        wearCloth(dragSrc, true);
       }
       dragSrc = null;
     }
 
     // ── Put cloth on character ────────────────────────────────────────────────
-    function wearCloth(src) {
+    function wearCloth(src, soundBool) {
       // only one of each clothing type at a time
       const existing = stage.querySelector(`img.worn-item[data-src="${src}"]`);
       if (existing) return; // already wearing it
@@ -209,7 +231,31 @@
       img.dataset.src = src;
       img.alt         = '';
       stage.appendChild(img);
+      if (soundBool) playRandomSound();
+    }
+
+    // ── Wear a random outfit (YOLO SWAG button) ───────────────────────────────────────────────────
+    function randomOutfit() {
+      resetDress();
+
+      let topPool = CLOTHES.filter(c => c.type === 'top');
+      let bottomPool = CLOTHES.filter(c => c.type === 'bottom');
+      let shoesPool = CLOTHES.filter(c => c.type === 'shoes');
+
+      //wear random shoes
+      const shoesIndex = Math.floor(Math.random() * shoesPool.length);
+      wearCloth(shoesPool[shoesIndex].src, false);
+
+      //wear a random bottom
+      const bottomIndex = Math.floor(Math.random() * bottomPool.length);
+      wearCloth(bottomPool[bottomIndex].src, false);
+
+      //wear a random top
+      const topIndex = Math.floor(Math.random() * topPool.length);
+      wearCloth(topPool[topIndex].src, false);
+
       playRandomSound();
+
     }
 
     // ── Play a random sound ───────────────────────────────────────────────────
@@ -224,7 +270,7 @@
         currentAudio.currentTime = 0;
       }
       currentAudio = new Audio(src);
-      currentAudio.volume = 1;
+      currentAudio.volume = 0.45;
       currentAudio.play();
     }
 
@@ -266,6 +312,6 @@
     }
 
     // ── Reset ─────────────────────────────────────────────────────────────────
-    resetBtn.addEventListener('click', () => {
+    function resetDress() {
       stage.querySelectorAll('.worn-item').forEach(el => el.remove());
-    });
+    }

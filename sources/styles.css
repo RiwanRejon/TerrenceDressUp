@@ -132,7 +132,7 @@
       background: rgba(255,255,255,0.75);
       color: #c0409a;
       font-family: inherit;
-      font-size: 0.8rem;
+      font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
       transition: background 0.15s, color 0.15s, border-color 0.15s;
@@ -274,9 +274,10 @@
       margin-bottom: 16px;
     }
 
-    #reset-btn, #bgmBtn {
+    #reset-btn, #bgmBtn, .coolbtn {
       /* width: 110px;
       height: 110px; */
+      width: 50%;
       padding: 12px;
       display: block;
       margin: 0 auto;
@@ -293,7 +294,7 @@
       transition: transform 0.12s, box-shadow 0.12s;
     }
 
-    #reset-btn:hover {
+    .coolbtn:hover {
       transform: scale(1.06);
       box-shadow: 0 6px 20px rgba(192,64,160,0.45);
     }

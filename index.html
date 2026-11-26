@@ -19,8 +19,8 @@
     <div id="clothes-panel">
       <h2>Wardrobe</h2>
       <div id="wardrobe-tabs">
-        <button class="tab-btn active" data-tab="all">All</button>
-        <button class="tab-btn" data-tab="top">Tops</button>
+        <!-- <button class="tab-btn" data-tab="all">All</button> -->
+        <button class="tab-btn active" data-tab="top">Tops</button>
         <button class="tab-btn" data-tab="bottom">Bottoms</button>
         <button class="tab-btn" data-tab="shoes">Shoes</button>
         <button class="tab-btn" data-tab="misc">Misc</button>
@@ -39,8 +39,9 @@
     <!-- Right: ads -->
      <div id="right-panel">
       <div id="button-panel">
-        <button id="reset-btn">Reset Dress</button>
-        <button id="bgmBtn" onclick="bgmToggle()">Mute music</button>
+        <button id="reset-btn" class="coolbtn" onclick="resetDress()">Reset Dress</button>
+        <button id="yoloBtn" class="coolbtn" onclick="randomOutfit()">YOLO SWAG!</button>
+        <button id="bgmBtn" class="coolbtn" onclick="bgmToggle()">Mute music</button>
       </div>
       <div id="ads-panel">
         <h2>Ads</h2>
