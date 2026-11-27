@@ -72,7 +72,7 @@
     const terrence    = document.getElementById('terrence');
     const panel       = document.getElementById('wardrobe-grid');
     const ghost       = document.getElementById('drag-ghost');
-    const resetBtn    = document.getElementById('reset-btn');
+    const resetBtn    = document.getElementById('resetBtn');
 
     // ─── Size the stage ──────────────────────────────────────────────────────
     // terrence.style.width  = CHARACTER_WIDTH  + 'px';
@@ -315,3 +315,87 @@
     function resetDress() {
       stage.querySelectorAll('.worn-item').forEach(el => el.remove());
     }
+
+    // ── Remove the last worn item ─────────────────────────────────────────────────────────────────
+    function undoLast() {
+      const wornItems = document.querySelectorAll('.worn-item');
+      if (wornItems.length > 0) {
+        wornItems[wornItems.length - 1].remove();
+      }
+    }
+
+    document.addEventListener('keydown', (event) => {
+    // Ignore if Shift or Alt is also held (e.g., Ctrl+Shift+Z for redo)
+    if (event.ctrlKey && !event.shiftKey && !event.altKey && event.key.toLowerCase() === 'z') {
+      event.preventDefault(); // Prevents default browser/input undo behavior
+      undoLast();
+      }
+    });
+    
+
+//========================= Export Image Script ======================
+
+  document.getElementById('exportBtn').addEventListener('click', () => {
+    exportStackedPngs('#stage', 'Terrence_swag.png');
+  });
+
+async function exportStackedPngs(containerSelector, filename = 'merged-image.png') {
+  const container = document.querySelector(containerSelector);
+  if (!container) {
+    throw new Error(`Container not found: ${containerSelector}`);
+  }
+
+  const images = Array.from(container.querySelectorAll('img'));
+  if (images.length === 0) {
+    throw new Error('No <img> elements found inside container.');
+  }
+
+  // Wait for every PNG layer to load and decode
+  await Promise.all(
+    images.map(async (img) => {
+      if (!img.complete) {
+        await new Promise((resolve, reject) => {
+          img.addEventListener('load', resolve, { once: true });
+          img.addEventListener('error', () => reject(new Error(`Failed to load: ${img.src}`)), { once: true });
+        });
+      }
+      if (img.decode) {
+        await img.decode().catch(() => {});
+      }
+    })
+  );
+
+  // Use natural pixel dimensions so the exported PNG isn't scaled by CSS
+  const width = images[0].naturalWidth;
+  const height = images[0].naturalHeight;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+
+  const ctx = canvas.getContext('2d');
+  // Canvas starts transparent; do not call fillRect()
+
+  for (const img of images) {
+    const opacity = parseFloat(window.getComputedStyle(img).opacity);
+    const prevAlpha = ctx.globalAlpha;
+
+    ctx.globalAlpha = Number.isNaN(opacity) ? 1 : opacity;
+    ctx.drawImage(img, 0, 0, width, height);
+    ctx.globalAlpha = prevAlpha;
+  }
+
+  canvas.toBlob((blob) => {
+    if (!blob) return;
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }, 'image/png');
+}
