@@ -45,6 +45,14 @@
       { src: 'clothes/pink wig.png', type: 'misc'},
       { src: 'clothes/star shirt.png', type: 'top'},
       { src: 'clothes/tights long.png', type: 'bottom'},
+      { src: 'clothes/wolf_chest.png', type: 'misc'},
+      { src: 'clothes/wolf_hands.png', type: 'misc'},
+      { src: 'clothes/wolf_mask.png', type: 'misc'},
+      { src: 'clothes/wolf_pants.png', type: 'bottom'},
+      { src: 'clothes/wolf_shoes.png', type: 'shoes'},
+      { src: 'clothes/wolf_tail.png', type: 'misc'},
+      { src: 'clothes/wolf_tshirt.png', type: 'top'},
+      { src: 'clothes/wolf_underwear.png', type: 'bottom'},
 
     ];
 
@@ -227,13 +235,22 @@
       const existing = stage.querySelector(`img.worn-item[data-src="${src}"]`);
       if (existing) return; // already wearing it
 
+      let awoo = new Audio('audio/sounds/awoo.mp3');
+      awoo.volume = 0.45;
+
       const img = document.createElement('img');
       img.className   = 'worn-item';
       img.src         = src;
       img.dataset.src = src;
       img.alt         = '';
       stage.appendChild(img);
-      if (soundBool) playRandomSound();
+
+      //play the awoo sound when the wolf mask is equipped
+      if(soundBool && src == 'clothes/wolf_mask.png') {
+        awoo.play();
+      } else if (soundBool) {
+        playRandomSound();
+      }
     }
 
     // ── Wear a random outfit (YOLO SWAG button) ───────────────────────────────────────────────────
