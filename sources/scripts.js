@@ -7,6 +7,7 @@
       'sources/ads/gif bday.gif',
       'sources/ads/gif terrence.gif',
       'sources/ads/Marmalade_Ad.gif',
+      'sources/ads/Lestats_Concert.gif',
     ]
     
     const CLOTHES = [
@@ -303,7 +304,7 @@
       setInterval(() => {
         index = (index + 1) % ADS.length;
         adEl.src = ADS[index];
-      }, 6000);
+      }, 5000);
     })();
 
     // ── Disappear Splash screen ──────────────────────────────────────────────────────────
