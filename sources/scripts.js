@@ -6,6 +6,7 @@
       'sources/ads/felis gif.gif', 
       'sources/ads/gif bday.gif',
       'sources/ads/gif terrence.gif',
+      'sources/ads/Marmalade_Ad.gif',
     ]
     
     const CLOTHES = [
